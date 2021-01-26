@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# remove all comments, spaces and blank lines from rules arg
+# remove all comments, spaces and blank lines from rules (arg 1)
 sed 's/#.*//g' "$1" > parsed_rules.txt
-sed -in 's/ //g' parsed_rules.txt
-sed -in '/^$/d' parsed_rules.txt
+sed -i 's/ //g' parsed_rules.txt
+sed -i '/^$/d' parsed_rules.txt
 
 # save packets from stdin in a variable
 packets=$(cat /dev/stdin)
@@ -19,8 +19,8 @@ done < parsed_rules.txt
 
 # # sort and deduplicate packets that matched several rules
 sort -uo matching_packets.txt matching_packets.txt
-sed -in 's/ //g' matching_packets.txt
-sed -in '/^$/d' matching_packets.txt
+sed -i 's/ //g' matching_packets.txt
+sed -i '/^$/d' matching_packets.txt
 
 # send matching packets to stdout and delete auxilary txt files
 cat matching_packets.txt
